@@ -1,0 +1,130 @@
+{% extends 'base/main.html' %} 
+{% load static %} 
+{% block title %}Todo App:Calendar{% endblock title %} 
+
+
+{% block content %}
+
+    <head>
+        {% comment %} import full calendar {% endcomment %}
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.7/index.global.min.js"></script>
+        <script src="{% static 'todo_app/js/calendar/index.global.min.js' %}"></script>
+
+        
+        {% comment %} insert my CSS file here {% endcomment %}
+        <link rel="stylesheet" href="{% static 'todo_app/css/calendar/calendarView.css' %}">
+
+
+        <script>
+
+            //waits for the page to load, then adds this JS
+            document.addEventListener('DOMContentLoaded', function() {
+
+                // creates variable calendarE1 in Javascript. Assigns it to (ID = calendar) below
+                var calendarEl = document.getElementById('calendar');
+
+                //create a variable calendar with the various calendar fields below
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+
+                    // Set the initial view of the calendar. options(dayGridWeek,timeGridWeek,timeGridDay)
+                    initialView: 'dayGridMonth', 
+
+                    //custom fields to add on the top of your calendar.
+                    headerToolbar: {
+                        left: 'prev',
+                        center: 'title',
+                        right: 'next'
+                    },
+                    
+                    // add a color to todays date(light blue) with bootstrap class (bg-info) 
+                    dayCellDidMount: function(info) {
+                        let today = new Date();
+                        if (
+                            info.date.getDate() === today.getDate() &&
+                            info.date.getMonth() === today.getMonth() &&
+                            info.date.getFullYear() === today.getFullYear()
+                        ) {
+                            info.el.classList.add('bg-info'); // Apply the 'bg-info' class to the current day
+                        }
+                    },
+
+
+                    // adds calendar events((tasks from todo app model) from the views in python. check views.py
+                    events: {{calendarEvents_json|safe}},
+
+
+                    //when you click on event on calendar (shows title, description,due date and time)
+                    eventClick: function(info) {
+                        // Get the clicked event's title, description, and due_datetime
+                        var title = info.event.title;
+                        var description = info.event.extendedProps.description;
+                        var due_date = info.event.start.toLocaleDateString();
+                        var due_time = info.event.start.toLocaleTimeString();
+
+
+                        // Update the elements in the "View your tasks here" section with the event details
+                        document.getElementById('task-title').innerText = "Title:" +" "+ title;
+                        document.getElementById('task-description').innerText = "Description:" +" "+ description;
+                        document.getElementById('task-due_datetime').innerText ="Due:"+ " " + due_date +" at " +due_time;
+                    },
+
+                    //Enables u to click on the calendar squares. not yet functional
+                    selectable: true,
+                    selectHelper:true,
+
+
+                });
+
+
+                //Renders() the variable calendar above, with all the calendar variables. 
+                calendar.render();
+
+
+                // Apply Bootstrap classes to the calendar elements
+                //calendarEl.classList.add('');
+
+            });
+
+
+        </script>
+
+
+    </head>
+
+
+
+    {% comment %} the body of the calendar starts here {% endcomment %}
+
+
+    {% comment %} flex-md-row-reverse is bootstrap. displays the calendar first instead of the tasks {% endcomment %}
+	<div class="d-md-flex p-md-5 flex-md-row-reverse">
+
+
+            {% comment %} shows the tasks in the calendar when its clicked from calendar {% endcomment %}
+            <div class="mt-3 view-tasks">
+
+                <h1 class="text-center">Click Calendar Task to View</h1>
+                <div class="container-md h3 m-3">
+                    <div class="mt-2 text-primary" id="task-title">Title</div>
+                    <div class="mt-2 text-success" id="task-description">Description</div>
+                    <div class="mt-2 text-danger" id="task-due_datetime">Due DateTime</div>
+                </div>
+
+            </div>
+
+
+            {% comment %} div for spacing {% endcomment %}
+            <div class="p-md-2 spacing"></div>
+
+
+
+
+            {% comment %} ID = calendar is where the calendar is displayed in our html {% endcomment %}
+            <div class="mt-3 calendar-view">
+                <div id="calendar"></div>
+            </div>
+		
+
+	</div>
+
+{% endblock content %}

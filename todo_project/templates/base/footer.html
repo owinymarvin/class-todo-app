@@ -1,0 +1,37 @@
+<!-- footer of the APP -->
+<footer class="container-fluid text-light bg-success">
+    <div class="row container-fluid justify-content-between text-center mx-auto pt-4">
+    
+        {% comment %} first column {% endcomment %}
+        <div class="col-md-4 mb-5">
+            <h2>ABOUT US</h2>
+            <p>The makers of the Todo App and their contributions</p>
+            <a href="{% url 'aboutUs' %}" class="btn btn-block btn-outline-light bg-success">About-Us</a>
+        </div>
+
+        {% comment %} 2nd column {% endcomment %}
+        <div class="col-md-4 mb-5">
+            <h2>CONTACT-US</h2>
+            <p>For the best technical support or inquiries</p>
+            <a href="{% url 'contactUs' %}" class="btn btn-block btn-outline-light bg-success">Contact-Us</a>
+        </div>
+
+        {% comment %} 3rd column {% endcomment %}
+        <div class="col-md-4 mb-5">
+            <h2>PRIVACY</h2>
+            <p>A guarantee you that your data is properly stored</p>
+            <a href="" class="btn btn-block btn-outline-light bg-success">Privacy</a>
+        </div>
+    </div>
+
+  <!-- copyright symbol -->
+  <hr />
+  <div class="row mb-1">
+    <div class="col-md-12 text-center">
+      <p>
+        &copy; 2023
+        <a href="#" class="text-white text-decoration-none">Todo-App </a>
+      </p>
+    </div>
+  </div>
+</footer>

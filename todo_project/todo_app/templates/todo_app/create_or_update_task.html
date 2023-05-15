@@ -1,0 +1,89 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+
+{% block title %}
+	{% if page == 'createTask' %}
+		Create New Task
+	{% else %}
+		Update Task
+	{% endif %}
+{% endblock title %}
+
+
+
+{% block content %}
+
+    <head>
+        <link rel="stylesheet" href="{% static 'todo_app/css/create_update_tasks.css' %}"> 	
+	</head>
+
+
+	<div class="container-fluid">
+
+		<div class="d-md-flex flex-md-row-reverse p-1">
+
+			<div class="mt-5 mb-5 logo-container">
+                <div class="svg-image mt-5">
+                    <img class="img-fluid"src="{% static 'todo_app/undraw/baseball.svg' %}">
+                </div>
+            </div> 
+
+			<div class="p-md-4 ">
+            </div>
+			
+			<div class="form-container m-5 p-3 m-auto">
+				{% if messages %}
+					<ul class="messages">
+						{% for message in messages %}
+						<li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+
+    			<form action="" method="post">
+					{% csrf_token %}
+					<h1 class="title mb-4"><a href="#">Create new Task</a></h1>
+
+					<div class="input-field">
+						<label for="">Task Name</label>
+						{{ todoTaskCreate.title }}                        
+					</div>
+
+					<div class="input-field">
+						<label for="">Task Description</label>
+						{{ todoTaskCreate.description }}                        
+					</div>
+
+					<div class="input-field">
+						<label for="">Due Date</label>
+						{{ todoTaskCreate.due_date }}
+					</div>
+
+
+					<div class="input-field">
+						<label for="">Due Time</label>
+						{{ todoTaskCreate.due_time }}
+					</div>
+
+
+					<input type="submit" class="form-control bg-primary">
+
+				</form>
+
+			</div>
+
+		</div>
+			
+	</div>
+
+{% endblock content %}
+	
+
+
+
+
+
+
+
+

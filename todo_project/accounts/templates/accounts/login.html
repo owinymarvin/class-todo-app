@@ -1,0 +1,100 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+{% block content %}
+    <head>
+        <link rel="stylesheet" href="{% static 'accounts/css/login_register.css' %}">
+    </head>
+
+    <div class="container-fluid" >
+
+        <div class="signin-container d-md-flex">
+            
+            
+            <div class="mt-5 mb-5 logo-container">
+                <div class="svg-image mt-5">
+                    <img class="img-fluid" src="{% static 'accounts/undraw/login.svg' %}" alt="brand image">
+                </div>
+            </div>
+
+
+            <div class="p-md-2">
+            </div>
+
+
+            <div class="form-container m-md-5 mx-auto">
+                <form action="" method="post">
+                    {% csrf_token %}
+
+
+                    {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                            {% endfor %}
+                    </ul>
+                    {% endif %}
+                    
+
+                    <h1 class="title"><a href="#">Sign In</a></h1>
+
+
+                    <div class="input-field">
+                        <label for="username_or_email">Username or email</label>
+                        <input type="text" id="id_username" class="form-control" name="username_or_email" required >
+                    </div>
+
+                    
+                    <div class="input-field">
+                        <label for="password">Password</label>
+                        <input type="password" id="id_password"class="form-control" name="password" required >
+                        {% comment %} <input type="checkbox" onclick="myFunction()">Show Password {% endcomment %}
+                    </div>
+
+                                     
+                    <div class="submit-container input-field">
+                        <button name="button" type="submit" class="btn bg-primary text-light">Login</button>
+                    </div>
+
+
+
+                    <br>Don't have an Account yet?
+                    <div class="input-field">
+                        <a href="{% url 'register' %}" class="btn bg-danger text-light form-control">Register</a> 
+                    </div>
+
+
+                </form> 
+            </div>
+            
+
+
+        </div>
+    </div>
+
+    <script>
+
+    </script>
+
+
+    <!-- <script>
+        function myFunction() {
+           var x = document.getElementById("user_password");
+        <p>Enter your password:</p>
+
+          Password: <input type="password" value="FakePSW" id="myInput" ><br><br>
+          <input type="checkbox" onclick="myFunction()">Show Password
+        }
+
+        function myFunction() {
+           var x = document.getElementById("myInput");
+           if (x.type === "password") {
+              x.type = "text";
+           } else {
+               x.type = "password";
+         }
+        }
+    </script> -->
+
+{% endblock content %}
+

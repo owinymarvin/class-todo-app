@@ -1,0 +1,24 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+{% block content %}
+
+    <head>
+        <link rel="stylesheet" href="{% static 'css/welcome.css' %}">
+    </head>
+
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>Feel free to reach out to us through any of the folloing channels:</p>
+        <ul>
+          <li><strong>WhatsApp:</strong> <a href="https://wa.me/0787061200">+256787061200</a></li>
+          <li><strong>Email:</strong> <a href="mailto:info@todoapp.com">contact@todoapp.com</a></li>
+          <li><strong>Telephone:</strong> <a href="tel:+256740045962">+256787061200</a></li>
+          <li><strong>Twitter:</strong> <a href="https://twitter.com/@todoapp">@todoapp</a></li>
+          <li><strong>Facebook:</strong> <a href="https://www.facebook.com/todoapp">todoapp facebook</a></li>
+        </ul>
+      </section>
+      
+
+
+{% endblock content %}

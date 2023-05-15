@@ -1,0 +1,32 @@
+#calendar.fc-unthemed th,
+#calendar.fc-unthemed td {
+    border: none !important;
+}
+
+#calendar {
+    max-height: 430px;
+    overflow-y: hidden !important;
+}
+
+@media (max-width: 576px) {
+    #calendar {
+        height: 600px;
+        /* Adjust the height as needed for small screens */
+        padding: 0.5rem;
+    }
+}
+
+.calendar-view {
+    margin: auto auto;
+    min-width: 300px !important;
+    min-height: 400px;
+    width: 100%;
+    /* background-color: red; */
+}
+
+.view-tasks {
+    min-width: 350px !important;
+    width: 100%;
+    /* background-color:green !important; */
+    padding: 2px;
+}

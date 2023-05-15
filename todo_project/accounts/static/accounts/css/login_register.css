@@ -1,0 +1,32 @@
+.title {
+    text-align: center;
+    margin-bottom:1.5rem;
+}
+.logo-container{
+    margin: auto auto;
+    min-width:320px !important;
+    /* background-color: red; */
+}
+.form-container {
+    min-width:350px !important;
+    width:60%;
+    /* background-color: red !important; */
+    padding:2px;
+    display:flex;
+    flex-direction: column;
+    margin: auto auto;
+}
+form {
+    color: #333238;
+}
+.input-field {
+    margin-bottom:1rem ;
+}
+.submit-container button {
+    background-color: rgb(146, 187, 221);
+    width: 100%;
+}
+button::after {
+    background-color:rgb(63, 154, 228) ;
+
+}

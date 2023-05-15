@@ -1,0 +1,111 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+{% block content %}
+    <head>
+        <link rel="stylesheet" href="{% static 'accounts/css/login_register.css' %}">
+    </head>
+
+    <div class="container-fluid">
+        
+        <div class="signin-container d-md-flex">
+
+            <div class="mt-5 mb-5 logo-container">
+                {% comment %} <h1 class="title"><a href="#">Register</a></h1> {% endcomment %}
+
+                <div class="svg-image mt-5">
+                    <img class="img-fluid"src="{% static 'accounts/undraw/register.svg' %}" alt="brand image">
+                </div>
+            </div>
+            
+            <div class="p-md-2 ">
+            </div>
+
+            <div class="form-container m-md-5 mx-auto">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <h1 class="title"><a href="#">Sign Up</a></h1>
+
+
+                    {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                            {% endfor %}
+                    </ul>
+                    {% endif %}
+
+
+                    <div class="input-field">
+                        <label for="user_login">Username</label>
+                        {{registrationForm.username}}
+                    </div>
+
+                    <div class="input-field">
+                        <label for="user_email">Email</label>
+                        {{registrationForm.email}}
+                    </div>
+                    
+                    <div class="input-field">
+                        <label for="user_password">Password</label>
+                        {{registrationForm.password1}}
+
+                    </div>
+                    
+                    <div class="input-field">
+                        <label for="user_password">Confirm password</label>
+                        {{registrationForm.password2}}
+                    </div>
+                    
+                    <div class="submit-container input-field">
+                        <button name="button" type="submit" class="btn bg-primary text-light">Register</button>
+                    </div>
+
+                    <br>
+                    Already have an account?
+                    <div class="input-field">
+                        <a href="{% url 'login' %}" class="btn bg-danger text-light form-control">Login</a> 
+                    </div>
+
+                </form> 
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- sign up application form-->
+    <script type="text/javascript">
+        function validation(){
+            var form = document.getElementById("form");
+            var form = document.getElementById("email").value;
+            var form = document.getElementById("text");
+            var pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+            if (email.match(pattern))
+            {
+                form.classlist.add("valid");
+                form.classlist.remove("invalid");
+                text.innerHTML = "Your Email address invalid.";
+                text.style.color = "#00ff00";
+
+            }
+            else
+            {
+                form.classlist.remove("valid");
+                form.classlist.add("invalid");
+                text.innerHTML = "please enter valid email address.";
+                text.style.color = "#ff0000";
+            }
+            if (email == "")
+            {
+                form.classlist.remove("valid");
+                form.classlist.remove("invalid");
+                text.innerHTML = "";
+                text.style.color = "#00ff00";
+
+            }
+        }
+    </script>
+
+
+{% endblock content %}
+
