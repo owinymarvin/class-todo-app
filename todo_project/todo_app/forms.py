@@ -1,7 +1,6 @@
 import datetime
 from django import forms
 from . models import TodoAppModel
-from .models import TodoAppModel
 
 class TodoAppForm(forms.ModelForm):
     due_date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date','min':datetime.datetime.today().date()}))

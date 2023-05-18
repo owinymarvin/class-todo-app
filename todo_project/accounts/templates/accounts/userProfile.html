@@ -1,0 +1,13 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+{% block content %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{userProfile}}    
+        <input type="submit" />
+    </form>
+
+{% endblock content %}
+

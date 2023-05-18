@@ -1,90 +1,108 @@
 {% load static %}
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+
+	
 	<div class="container-fluid">
-    <a class="navbar-brand h1 mb-0" href="{% url 'welcome' %}">
-		<img src="{% static 'base/logo.png' %}" alt="logo image" style="width:35px; height: 35px"/>TODO-APP</a>
-
-    <!-- button will appear when navbar is medium screen. (md) -->
-    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarNav">
-    	<ul class="navbar-nav ms-auto w-50">
-
-        {% comment %} options to activate depending on page were on {% endcomment %} 
-
-		{% comment %} if user is not authenticated {% endcomment %}
-		{% if not request.user.is_authenticated %} 
-			{% if page == 'welcome' %}
-				<li class="nav-item"><a class="nav-link active" href="{% url 'welcome' %}">Welcome</a></li>
-			{% else %}
-				<li class="nav-item"><a class="nav-link" href="{% url 'welcome' %}">Welcome</a></li>
-			{% endif %}
-		
-
-			{% if page == 'login' %}
-				<li class="nav-item"><a class="nav-link active" href="{% url 'login' %}">Login</a></li>
-			{% else %}
-				<li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
-			{% endif %} 
 
 
-			{% if page == 'register' %}
-				<li class="nav-item"><a class="nav-link active" href="{% url 'register' %}">Register</a></li>
-			{% else %}
-				<li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
-			{% endif %} 
-		
+		<a class="navbar-brand h1 mb-0" href="{% url 'welcome' %}">
+			<img src="{% static 'base/logo.png' %}" alt="logo image" style="width:35px; height: 35px"/>TODO-APP</a>
 
 
-		{% comment %} if user is authenticated {% endcomment %}
-		{% else %} 
-		
-			{% if page == 'home' %}
-				<li class="nav-item"><a class="nav-link active" href="{% url 'viewTasks' %}">Home</a></li>
-			{% else %}
-				<li class="nav-item"><a class="nav-link" href="{% url 'viewTasks' %}">Home</a></li>
-			{% endif %} 
-			
-			
-			{% if page == 'createTask' %}
-				<li class="nav-item"><a class="nav-link active" href="{% url 'createTask' %}">Create-task</a></li>
-			{% else %}
-        		<li class="nav-item"><a class="nav-link" href="{% url 'createTask' %}">Create-task</a></li>
-        	{% endif %} 
-			
-			
-			{% if page == 'updateTask' %}
-        		<li class="nav-item"><a class="nav-link active" href="#">Update-task</a></li>
-        	{% endif %}
+		<!-- button will appear when navbar is medium screen. (md) -->
+		<button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
 
-			
-			{% if page == 'deleteTask' %}
-        		<li class="nav-item"><a class="nav-link active" href="#">Delete-task</a></li>
-        	{% endif %}
+		<div class="collapse navbar-collapse" id="navbarNav">
+
+
+			<ul class="navbar-nav ms-auto">
+				{% comment %} bootstrap options activate depending on page were on {% endcomment %} 
+				{% comment %} if user is not authenticated, this section activates {% endcomment %}
+				{% if not request.user.is_authenticated %} 
+					{% if page == 'welcome' %}
+						<li class="nav-item mx-4"><a class="nav-link active" href="{% url 'welcome' %}">Welcome</a></li>
+					{% else %}
+						<li class="nav-item mx-4"><a class="nav-link" href="{% url 'welcome' %}">Welcome</a></li>
+					{% endif %}
 				
-			
-			{% if page == 'calendar' %}
-        		<li class="nav-item"><a class="nav-link active" href="{% url 'calendarView' %}">Calendar</a></li>
-        	{% else %}
-        		<li class="nav-item"><a class="nav-link" href="{% url 'calendarView' %}">Calendar</a></li>
-        	{% endif %} 
-			
-			
-			{% if page == 'contactUs' %}
-        		<li class="nav-item"><a class="nav-link active" href="{% url 'contactUs' %}">Contact-us</a></li>
-        	{% else %}
-        		<li class="nav-item"><a class="nav-link" href="{% url 'contactUs' %}">Contact-us</a></li>
-        	{% endif %}
-			
-			
-        	<li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
-        
-        {% endif %}
-      </ul>
-    </div>
-  </div>
+
+					{% if page == 'login' %}
+						<li class="nav-item mx-4"><a class="nav-link active" href="{% url 'login' %}">Login</a></li>
+					{% else %}
+						<li class="nav-item mx-4"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+					{% endif %} 
+
+
+					{% if page == 'register' %}
+						<li class="nav-item mx-4"><a class="nav-link active" href="{% url 'register' %}">Register</a></li>
+					{% else %}
+						<li class="nav-item mx-4"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
+					{% endif %} 
+				
+
+
+				{% comment %} if user is authenticated {% endcomment %}
+				{% else %} 
+				
+					{% if page == 'home' %}
+						<li class="nav-item mx-4"><a class="nav-link active" href="{% url 'viewTasks' %}">Home</a></li>
+					{% else %}
+						<li class="nav-item mx-4"><a class="nav-link" href="{% url 'viewTasks' %}">Home</a></li>
+					{% endif %} 
+
+					{% if page == 'userProfile' %}
+						<li class="nav-item mx-4"><a class="nav-link active" href="{% url 'userProfile' %}">Profile</a></li>
+					{% else %}
+						<li class="nav-item mx-4"><a class="nav-link" href="{% url 'userProfile' %}">Profile</a></li>
+					{% endif %} 
+					
+					
+					{% if page == 'createTask' %}
+						<li class="nav-item mx-4"><a class="nav-link active" href="{% url 'createTask' %}">Create-task</a></li>
+					{% else %}
+						<li class="nav-item mx-4"><a class="nav-link" href="{% url 'createTask' %}">Create-task</a></li>
+					{% endif %} 
+					
+					
+					{% if page == 'updateTask' %}
+						<li class="nav-item mx-4"><a class="nav-link active" href="#">Update-task</a></li>
+					{% endif %}
+
+
+					
+					{% if page == 'deleteTask' %}
+						<li class="nav-item mx-4"><a class="nav-link active" href="#">Delete-task</a></li>
+					{% endif %}
+						
+					
+					{% if page == 'calendar' %}
+						<li class="nav-item mx-4"><a class="nav-link active" href="{% url 'calendarView' %}">Calendar</a></li>
+					{% else %}
+						<li class="nav-item mx-4"><a class="nav-link" href="{% url 'calendarView' %}">Calendar</a></li>
+					{% endif %} 
+					
+					
+					{% if page == 'contactUs' %}
+						<li class="nav-item mx-4"><a class="nav-link active" href="{% url 'contactUs' %}">Contact-us</a></li>
+					{% else %}
+						<li class="nav-item mx-4"><a class="nav-link" href="{% url 'contactUs' %}">Contact-us</a></li>
+					{% endif %}
+					
+					
+					<li class="nav-item mx-4"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+				
+				{% endif %}
+
+			</ul>
+
+
+		</div>
+
+
+
+  	</div>
 </nav>

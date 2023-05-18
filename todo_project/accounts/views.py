@@ -1,14 +1,15 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from . forms import registrationForm
+from . forms import registrationForm, UserProfileForm
+from . models import UserProfile
 from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib import messages
 from django.db.models import Q
 
 
-# Create your views here.
+
 def registerUser(request):
     page = 'register'
     if request.user.is_authenticated:
@@ -24,7 +25,10 @@ def registerUser(request):
             new_user = registrationData.save(commit=False)
             new_user.username = new_user.username.lower()
 
-            
+            # save the user
+            new_user.save()
+            login(request, new_user)
+
 
             # sending an email
             subject = 'Todo App: Thank you for Registering'
@@ -33,10 +37,7 @@ def registerUser(request):
             recipient_list = [new_user.email]
             send_mail(subject, message, from_email,recipient_list, fail_silently=True)
 
-            # save the user
-            new_user.save()
-            login(request, new_user)
-
+            # redirect them to the home/viewtasks page if successful
             return redirect('viewTasks')
         
         else:
@@ -49,6 +50,7 @@ def registerUser(request):
 
     context = {'page': page,'registrationForm': registration }
     return render(request, 'accounts/register.html', context)
+
 
 
 def loginUser(request):
@@ -69,6 +71,7 @@ def loginUser(request):
             # authenticates user if correct user password is applied to username or email, returns db_user
             db_user = authenticate(
                 request, username=user.username, password=password)
+            
 
             if db_user is not None:
                 login(request, db_user)
@@ -94,10 +97,36 @@ def loginUser(request):
     return render(request, 'accounts/login.html', context)
 
 
+
 def logoutUser(request):
     logout(request)
     return redirect('login')
 
 
+
+# Users Profile
 def userProfile(request):
-    return redirect('login')
+    page = 'userProfile'
+
+    try:
+        # Create a UserProfile instance for the new user, if it already exists, skipps
+        UserProfile.objects.create(user=request.user)
+    except:
+        pass
+
+
+    user_profile = UserProfile.objects.get(user=request.user)
+    user_profile_form = UserProfileForm()
+
+    if request.method == 'POST':
+        user_profile_form = UserProfileForm(request.POST, request.FILES, instance=user_profile)
+        if user_profile_form.is_valid():
+            user_profile_form.save()
+            return redirect('userProfile')
+    else:
+        user_profile_form = UserProfileForm(instance=user_profile)
+
+    context = {'page':page,'userProfile': user_profile_form}
+    return render(request, 'accounts/userProfile.html', context)
+
+
