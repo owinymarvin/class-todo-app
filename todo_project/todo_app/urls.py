@@ -10,6 +10,7 @@ urlpatterns = [
     # tasks
     path('views-tasks/',views.viewTasks, name='viewTasks'),
     path('create-task/', views.createTask, name='createTask'),
+    path('completed-task/<str:pk>/', views.completeTask, name='completeTask'),
     path('update-task/<str:pk>/', views.updateTask, name='updateTask'),
     path('delete-task/<str:pk>/', views.deleteTask, name='deleteTask'), 
 

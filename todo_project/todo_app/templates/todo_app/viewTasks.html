@@ -13,14 +13,13 @@
         </head>
 
         
-        {% if page == 'home' %}
+        {% if page == 'viewTasks' %}
             <h1>TODO APP HOMEPAGE</h1>
         {% else%}
             <h1>TODO APP TASKS</h1>
         {% endif %}
             
        
-
         {% if messages %}
         <ul class="messages">
             {% for message in messages %}
@@ -29,22 +28,35 @@
         </ul>
         {% endif %}
 
+
         <ol>
             {% for task in todoTask %}
-                <li class="mt-3">
-                    {{ task.title }} 
-                    {% if task.completed %}
-                        (completed)
-                        <a class="btn btn-outline-light bg-danger" href="{% url 'deleteTask' task.id %}">Delete</a>
 
-                    {% else %}
+                <li class="mt-3">
+
+                    {% if task.completed %}
+
+                        {{ task.title }} ( Due: <b class="text-danger">{{task.due_datetime}} </b>completed: <b class = "text-primary">{{task.completed_on_datetime}}</b> )
+                        <div class="mt-2"></div>
+                        
+                        <a class="btn btn-outline-light bg-secondary" href="">Task completed {{task.completed_on_datetime|timesince}} ago</a>
                         <a class="btn btn-outline-light bg-success" href="{% url 'updateTask' task.id %}">Update</a>
                         <a class="btn btn-outline-light bg-danger" href="{% url 'deleteTask' task.id %}">Delete</a>
-                        <br><br>
-                   
-                            Due Date and Time:  <a class = "text-danger">{{task.due_datetime}}</a><br>
                         <hr>
+
+                    {% else %}
+
+                        {{ task.title }} ( Due:  <a class = "text-danger">{{task.due_datetime}}</a> )
+                        <div class="mt-2"></div>
+                                               
+                        Due in {{task.due_datetime|timeuntil}}
+                        <a class="btn btn-outline-light bg-primary" href="{% url 'completeTask' task.id %}">Mark As Complete</a>
+                        <a class="btn btn-outline-light bg-success" href="{% url 'updateTask' task.id %}">Update</a>
+                        <a class="btn btn-outline-light bg-danger" href="{% url 'deleteTask' task.id %}">Delete</a>                   
+                        <hr>
+
                     {% endif %} 
+
                 </li>
 
             {% empty %}

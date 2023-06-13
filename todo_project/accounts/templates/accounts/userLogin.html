@@ -1,6 +1,8 @@
 {% extends 'base/main.html' %}
 {% load static %}
 
+{% block title %}Todo App: Login To Your Account{% endblock title %}
+
 {% block content %}
     <head>
         <link rel="stylesheet" href="{% static 'accounts/css/login_register.css' %}">
@@ -30,7 +32,7 @@
                     {% if messages %}
                     <ul class="messages">
                         {% for message in messages %}
-                        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
                             {% endfor %}
                     </ul>
                     {% endif %}
@@ -41,14 +43,14 @@
 
                     <div class="input-field">
                         <label for="username_or_email">Username or email</label>
-                        <input type="text" id="id_username" class="form-control" name="username_or_email" required >
+                        <input type="text" name="username_or_email" id="id_username" class="form-control"  required autocomplete="" />
                     </div>
 
                     
                     <div class="input-field">
                         <label for="password">Password</label>
-                        <input type="password" id="id_password"class="form-control" name="password" required >
-                        {% comment %} <input type="checkbox" onclick="myFunction()">Show Password {% endcomment %}
+                        <input type="password" name="password1" id="id_password1"class="form-control"  required autocomplete="" />
+                        <input type="checkbox" onclick="showPassword()" > show password
                     </div>
 
                                      
@@ -57,11 +59,19 @@
                     </div>
 
 
-
-                    <br>Don't have an Account yet?
-                    <div class="input-field">
-                        <a href="{% url 'register' %}" class="btn bg-danger text-light form-control">Register</a> 
+                    {% comment %} forgot password {% endcomment %}
+                    <hr class="mt-5">
+                    <div class ="input-field">
+                        <a href="{% url 'passwordResetForm' %}" class ="btn bg-success text-light form-control">Forgot My Password</a>
                     </div>
+
+
+                    <div class="input-field">
+                        <a href="{% url 'register' %}" class="btn bg-success text-light form-control">Register New Account</a> 
+                    </div>
+
+
+                    
 
 
                 </form> 
@@ -72,29 +82,17 @@
         </div>
     </div>
 
+
     <script>
-
-    </script>
-
-
-    <!-- <script>
-        function myFunction() {
-           var x = document.getElementById("user_password");
-        <p>Enter your password:</p>
-
-          Password: <input type="password" value="FakePSW" id="myInput" ><br><br>
-          <input type="checkbox" onclick="myFunction()">Show Password
+        function showPassword() {
+            var x = document.getElementById("id_password1");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
         }
-
-        function myFunction() {
-           var x = document.getElementById("myInput");
-           if (x.type === "password") {
-              x.type = "text";
-           } else {
-               x.type = "password";
-         }
-        }
-    </script> -->
+    </script> 
 
 {% endblock content %}
 

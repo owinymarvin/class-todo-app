@@ -1,6 +1,9 @@
 {% extends 'base/main.html' %}
 {% load static %}
 
+{% block title %}Todo App: Register New Account{% endblock title %}
+
+
 {% block content %}
     <head>
         <link rel="stylesheet" href="{% static 'accounts/css/login_register.css' %}">
@@ -30,8 +33,8 @@
                     {% if messages %}
                     <ul class="messages">
                         {% for message in messages %}
-                        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-                            {% endfor %}
+                            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                        {% endfor %}
                     </ul>
                     {% endif %}
 
@@ -64,7 +67,7 @@
                     <br>
                     Already have an account?
                     <div class="input-field">
-                        <a href="{% url 'login' %}" class="btn bg-danger text-light form-control">Login</a> 
+                        <a href="{% url 'login' %}" class="btn bg-success text-light form-control">Login</a> 
                     </div>
 
                 </form> 
@@ -72,40 +75,6 @@
             
         </div>
     </div>
-
-    <!-- sign up application form-->
-    <script type="text/javascript">
-        function validation(){
-            var form = document.getElementById("form");
-            var form = document.getElementById("email").value;
-            var form = document.getElementById("text");
-            var pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-            if (email.match(pattern))
-            {
-                form.classlist.add("valid");
-                form.classlist.remove("invalid");
-                text.innerHTML = "Your Email address invalid.";
-                text.style.color = "#00ff00";
-
-            }
-            else
-            {
-                form.classlist.remove("valid");
-                form.classlist.add("invalid");
-                text.innerHTML = "please enter valid email address.";
-                text.style.color = "#ff0000";
-            }
-            if (email == "")
-            {
-                form.classlist.remove("valid");
-                form.classlist.remove("invalid");
-                text.innerHTML = "";
-                text.style.color = "#00ff00";
-
-            }
-        }
-    </script>
-
 
 {% endblock content %}
 

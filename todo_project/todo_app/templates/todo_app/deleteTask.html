@@ -1,14 +1,15 @@
 {% extends 'base/main.html' %}
 
+{% block title %}Todo App: Delete Task{% endblock title %}
 
 {% block content %}
     <div class="container-md m-5">
         <form action="" method="post">
             {% csrf_token %}
-            <p>Are you sure you want to delete the task?</p>
-            {{todoTask}}
-            <a href="{{request.META.HTTP_REFERER}}">Go Back</a>
-            <input type="submit" value="confirm">
+            <h4>Are you sure you want to delete the task <strong>"{{todoTask}}"</strong> ? </h4>
+            
+            <a class="btn btn-lg bg-success text-light" href="{{request.META.HTTP_REFERER}}">No,Go Back</a>
+            <input type="submit" value="Yes i want to Delete Task" class="btn btn-lg bg-danger text-light">
         </form>
     </div>
     

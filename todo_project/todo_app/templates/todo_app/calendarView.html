@@ -63,15 +63,11 @@
 
 
                         // Update the elements in the "View your tasks here" section with the event details
-                        document.getElementById('task-title').innerText = "Title:" +" "+ title;
-                        document.getElementById('task-description').innerText = "Description:" +" "+ description;
-                        document.getElementById('task-due_datetime').innerText ="Due:"+ " " + due_date +" at " +due_time;
+                        document.getElementById('task-title').innerText = title;
+                        document.getElementById('task-description').innerText = description;
+                        document.getElementById('task-due_datetime').innerText =due_date +" at " +due_time;
                     },
-
-                    //Enables u to click on the calendar squares. not yet functional
-                    selectable: true,
-                    selectHelper:true,
-
+                    
 
                 });
 
@@ -101,13 +97,13 @@
 
 
             {% comment %} shows the tasks in the calendar when its clicked from calendar {% endcomment %}
-            <div class="mt-3 view-tasks">
+            <div class="mt-3 view-tasks card p-5">
 
                 <h1 class="text-center">Click Calendar Task to View</h1>
                 <div class="container-md h3 m-3">
-                    <div class="mt-2 text-primary" id="task-title">Title</div>
-                    <div class="mt-2 text-success" id="task-description">Description</div>
-                    <div class="mt-2 text-danger" id="task-due_datetime">Due DateTime</div>
+                    <div class="mt-4 text-primary text-uppercase" id="task-title">Title</div><hr>
+                    <div class="mt-4 text-success text-capitalize" id="task-description">Description</div>
+                    <div class="mt-4 text-danger" id="task-due_datetime">Due Date</div>
                 </div>
 
             </div>

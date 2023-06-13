@@ -8,12 +8,14 @@ class TodoAppModel(models.Model):
     description = models.TextField(null=True,blank=True)
     due_datetime = models.DateTimeField(blank=True, auto_now=False)
     completed = models.BooleanField(default=False)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    completed_on_datetime=models.DateTimeField(null=True,blank=True, auto_now=False)
+    email_notification_sent = models.BooleanField(default=False)
+    created_at_datetime = models.DateTimeField(auto_now_add=True)
+    updated_at_datetime = models.DateTimeField(auto_now=True)
     
     
     class Meta:
-        ordering = ['due_datetime','-updated', '-created']
+        ordering = ['completed', 'due_datetime','updated_at_datetime']
 
     def __str__(self):
         return self.title

@@ -1,6 +1,8 @@
 {% extends 'base/main.html' %} 
 {% load static %} 
 
+{% block title %}WELCOME: Manage Your Tasks{% endblock title %}
+
 {% block content %}
 
     <div class="text-center p-5">
@@ -12,7 +14,7 @@
             get reminders, track task progress
         </p>
         
-        <a href="{% url 'login' %}" class="btn btn-block btn-outline-light bg-success">
+        <a href="{% url 'register' %}" class="btn btn-block btn-outline-light bg-success">
             Get Started Today
         </a>
     </div>

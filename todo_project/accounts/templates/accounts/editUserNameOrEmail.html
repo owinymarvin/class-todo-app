@@ -1,0 +1,84 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+{% block title %}Todo App: Edit User Profile{% endblock title %}
+
+{% block content %}
+
+    <head>
+        <link rel="stylesheet" href="{% static 'accounts/css/login_register.css' %}">
+    </head>
+
+    <div class="container-fluid">
+
+        <div class="signin-container d-md-flex">
+
+
+            <div class="mt-5 mb-5 logo-container">
+                <div class="svg-image mt-5">
+                    <img class="img-fluid" src="{% static 'accounts/undraw/userProfile.svg' %}" alt="brand image">
+                </div>
+            </div>
+
+
+            <div class="p-md-2"></div>
+
+
+            <div class="form-container m-md-5 mx-auto">
+
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                <form action="" method="post">
+                    {% csrf_token %}                
+
+                    <h1 class="title">{{userProfile.username.upper}}'S PROFILE</h1>
+                    
+
+                    <div class="input-field">
+                        <label for="username">New Username</label>
+                        <input type="text" name="change_username" placeholder='username:  {{userProfile.username}}' class="form-control" autocomplete="new-password" />
+                    </div>
+
+
+                    <div class="input-field">
+                        <label for="username">New Email</label>
+                        <input type="text" name="change_email" placeholder='email:  {{userProfile.email}}' class="form-control" autocomplete="new-password" />
+                    </div>
+
+
+                    <div class="input-field">
+                        <label for="username">Enter your password to apply changes</label>
+                        <input type="password" name="password" placeholder=" ********** " class="form-control" required autocomplete="new-password" />
+                    </div>
+
+                    <div class="input-field">
+                        <input type="submit" value="Confirm Changes" class="btn bg-primary text-light form-control">
+                    </div>
+
+
+            
+
+                    {% comment %} for editing password {% endcomment %}
+                <div class="input-field">
+                        <a href="{% url 'editUserPassword' %}" class="btn bg-danger text-light form-control mt-3">Change your Password</a>
+                    </div>
+
+
+                </form>
+
+
+            </div>
+
+        </div>
+        
+    </div>
+
+
+
+{% endblock content %}
