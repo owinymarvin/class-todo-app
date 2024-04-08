@@ -1,0 +1,8 @@
+version: 1.0
+
+service:
+  name: todo-app
+  imageConfiguration:
+    runtimeEnvironment: PYTHON_3.9
+    port: 8000
+
