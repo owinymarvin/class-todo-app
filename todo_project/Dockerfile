@@ -1,18 +1,9 @@
-# Base image for Python environment
-FROM python:3.9
-
-# Create a working directory
+FROM python:3.12.2-slim-bullseye
+ENV PYTHONBUFFERED=1
+ENV PORT 8080
 WORKDIR /app
-
-# Copy requirements.txt and install dependencies
-COPY requirements.txt .
+COPY . /app/
+RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
-
-# Copy your Django project code
-COPY . .
-
-# Expose the Django application port (usually 8000)
-EXPOSE 8000
-
-# Run the Django development server (modify as needed for production)
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD gunicorn todo_project.wsgi:application --bind 0.0.0.0:"${PORT}"
+EXPOSE ${PORT}
